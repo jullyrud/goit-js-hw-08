@@ -1,6 +1,8 @@
 import throttle from "lodash.throttle"
 
-let data = {}
+let data = JSON.parse(localStorage.getItem("feedback-form-state")) || {}
+
+console.log(localStorage.getItem("feedback-form-state"))
 
 const formRefs = document.querySelector('.feedback-form')
 
@@ -13,29 +15,27 @@ function saveFormData(e) {
 
      data[e.target.name] = e.target.value
 
-    console.log(data);
-    
-    // data['email'] = formEl.email.value,
-    // data['message'] = formEl.message.value
-    
     localStorage.setItem("feedback-form-state", JSON.stringify(data))
+    
     console.log('пошла запись в локал');
 }
 
 function sendData(e) {
     e.preventDefault();
     e.target.reset()
-        localStorage.setItem("feedback-form-state", "")
+    localStorage.removeItem("feedback-form-state")
+    data = {}
 
 }
 
 function populateTextArea() {
-
+    if (localStorage.getItem("feedback-form-state") !== null){
     const dataFromLocalParced = JSON.parse(localStorage.getItem("feedback-form-state"));
-    
-    if (dataFromLocalParced) {
+    if (dataFromLocalParced.email){
         formRefs.email.value = dataFromLocalParced.email
+    } 
+    if (dataFromLocalParced.message){
         formRefs.message.value = dataFromLocalParced.message
-    }
-
+    }}ґ
+    
 }
