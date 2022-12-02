@@ -36,6 +36,6 @@ function populateTextArea() {
     } 
     if (dataFromLocalParced.message){
         formRefs.message.value = dataFromLocalParced.message
-    }}ґ
+    }}
     
 }
